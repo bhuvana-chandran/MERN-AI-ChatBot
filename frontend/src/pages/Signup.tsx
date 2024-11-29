@@ -33,25 +33,41 @@ const SignUp = () => {
   }, [auth]);
 
   return (
-    <Box width={"100%"} height={"100%"} display="flex" flex={1}>
-      <Box padding={8} mt={10} display={{ md: "flex", sm: "none", xs: "none" }}>
+    <Box
+      width="100%"
+      height="100%"
+      display="flex"
+      flexDirection={{ xs: "column", md: "row" }}
+    >
+      <Box
+        display={{ xs: "none", md: "flex" }}
+        justifyContent="center"
+        alignItems="center"
+        flex={1}
+        padding={{ md: 8 }}
+      >
         <img
           src="ai-robot.png"
           alt="Robot"
-          style={{ width: "400px", marginLeft: "20%" }}
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            width: "300px",
+          }}
         />
       </Box>
       <Box
-        display={"flex"}
-        flex={{ xs: 1, md: 0.5 }}
-        justifyContent={"center"}
-        padding={2}
-        ml={"20%"}
-        mt={10}
+        display="flex"
+        flex={1}
+        justifyContent="center"
+        alignItems="center"
+        padding={{ xs: 2, md: 8 }}
       >
         <form
           onSubmit={handleSubmit}
           style={{
+            width: "100%",
+            maxWidth: "400px",
             margin: "auto",
             padding: "30px",
             boxShadow: "10px 10px 20px #000",
@@ -59,44 +75,36 @@ const SignUp = () => {
             border: "none",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
+          <Typography
+            variant="h4"
+            textAlign="center"
+            marginBottom={4}
+            fontWeight={600}
           >
-            <Typography
-              variant="h4"
-              textAlign="center"
-              padding={4}
-              fontWeight={600}
-            >
-              SignUp
-            </Typography>
-            <CustomizedInput type="text" name="name" label="Name" />
-            <CustomizedInput type="email" name="email" label="Email" />
-            <CustomizedInput type="password" name="password" label="Password" />
-            <Button
-              type="submit"
-              sx={{
-                px: 2,
-                py: 2,
-                mt: 2,
-                width: "400px",
-                borderRadius: 2,
-                backgroundColor: "#42a5f5",
+            SignUp
+          </Typography>
+          <CustomizedInput type="text" name="name" label="Name" />
+          <CustomizedInput type="email" name="email" label="Email" />
+          <CustomizedInput type="password" name="password" label="Password" />
+          <Button
+            type="submit"
+            sx={{
+              width: "100%",
+              px: 2,
+              py: 2,
+              mt: 2,
+              borderRadius: 2,
+              backgroundColor: "#42a5f5",
+              color: "white",
+              ":hover": {
+                backgroundColor: "#40c4ff",
                 color: "white",
-                ":hover": {
-                  backgroundColor: "#40c4ff",
-                  color: "white",
-                },
-              }}
-              endIcon={<IoIosLogIn />}
-            >
-              SignUp
-            </Button>
-          </Box>
+              },
+            }}
+            endIcon={<IoIosLogIn />}
+          >
+            SignUp
+          </Button>
         </form>
       </Box>
     </Box>
