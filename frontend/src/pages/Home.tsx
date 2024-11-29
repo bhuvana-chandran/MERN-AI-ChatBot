@@ -9,7 +9,7 @@ const Home = () => {
           display: "flex",
           width: "100%",
           flexDirection: "column",
-          alignItems: "center",
+          textAlign: "center",
           mx: "auto",
           mt: 20,
         }}
@@ -21,30 +21,23 @@ const Home = () => {
           sx={{
             width: "100%",
             display: "flex",
-            flexDirection: { md: "row", xs: "column" },
             gap: 5,
             position: "relative",
+            justifyContent: "center",
           }}
         >
-          <Box
+          <img
+            src="robot.png"
+            alt="robot"
             style={{
               width: "500px",
               margin: "auto",
-              position: "relative",
+              maskImage:
+                "linear-gradient(to right, transparent, black 45%, black 5%, transparent)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent, black 45%, black 5%, transparent)",
             }}
-          >
-            <img
-              src="robot.png"
-              alt="robot"
-              style={{
-                width: "100%",
-                maskImage:
-                  "linear-gradient(to right, transparent, black 45%, black 5%, transparent)",
-                WebkitMaskImage:
-                  "linear-gradient(to right, transparent, black 45%, black 5%, transparent)",
-              }}
-            />
-          </Box>
+          />
         </Box>
       </Box>
     </Box>
