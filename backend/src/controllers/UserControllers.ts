@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import User from "../models/UserModel.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { createToken } from "../utils/jwt-token-generator.js";
 import { COOKIE_NAME } from "../utils/constants.js";
 
