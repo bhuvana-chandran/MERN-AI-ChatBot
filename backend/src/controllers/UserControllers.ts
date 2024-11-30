@@ -36,7 +36,7 @@ export const UserSignUp = async (
     res.clearCookie(COOKIE_NAME, {
       path: "/",
       httpOnly: true,
-      domain: "localhost",
+      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
       signed: true,
     });
     const token = createToken(user._id.toString(), user.email, "7d");
@@ -44,7 +44,7 @@ export const UserSignUp = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "localhost",
+      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
       expires,
       httpOnly: true,
       signed: true,
@@ -79,7 +79,7 @@ export const UserLogin = async (
     res.clearCookie(COOKIE_NAME, {
       path: "/",
       httpOnly: true,
-      domain: "localhost",
+      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
       signed: true,
     });
     const token = createToken(user._id.toString(), user.email, "7d");
@@ -87,7 +87,7 @@ export const UserLogin = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "localhost",
+      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
       expires,
       httpOnly: true,
       signed: true,
@@ -145,7 +145,7 @@ export const UserLogout = async (
     res.clearCookie(COOKIE_NAME, {
       path: "/",
       httpOnly: true,
-      domain: "localhost",
+      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
       signed: true,
     });
     
