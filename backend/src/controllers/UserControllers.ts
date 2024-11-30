@@ -27,7 +27,7 @@ export const UserSignUp = async (
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      res.status(401).json({ message: "User Already Exist" });
+      return res.status(409).json({ message: "User Already Exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ name, email, password: hashedPassword });
@@ -36,26 +36,32 @@ export const UserSignUp = async (
     res.clearCookie(COOKIE_NAME, {
       path: "/",
       httpOnly: true,
-      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "mern-ai-chatbot-frontend.onrender.com"
+          : "localhost",
       signed: true,
+      secure: true,
     });
     const token = createToken(user._id.toString(), user.email, "7d");
     const expires = new Date();
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "mern-ai-chatbot-frontend.onrender.com"
+          : "localhost",
       expires,
       httpOnly: true,
       signed: true,
+      secure: true,
     });
-    return res
-      .status(201)
-      .json({
-        message: "SignedUp Successfully",
-        name: user.name,
-        email: user.email,
-      });
+    return res.status(201).json({
+      message: "SignedUp Successfully",
+      name: user.name,
+      email: user.email,
+    });
   } catch (error) {
     return res.status(500).json({ message: "ERROR", cause: error.message });
   }
@@ -72,25 +78,33 @@ export const UserLogin = async (
     if (!user) {
       return res.status(400).json({ message: "User not Registered" });
     }
-    const isPassworCorrect = await bcrypt.compare(password, user.password);
-    if (!isPassworCorrect) {
-      return res.status(400).json({ Message: "Incorrect Password!" });
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Incorrect Password!" });
     }
     res.clearCookie(COOKIE_NAME, {
       path: "/",
       httpOnly: true,
-      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "mern-ai-chatbot-frontend.onrender.com"
+          : "localhost",
       signed: true,
+      secure: true,
     });
     const token = createToken(user._id.toString(), user.email, "7d");
     const expires = new Date();
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "mern-ai-chatbot-frontend.onrender.com"
+          : "localhost",
       expires,
       httpOnly: true,
       signed: true,
+      secure: true,
     });
     return res
       .status(200)
@@ -110,12 +124,14 @@ export const VerifyUser = async (
     // user token ckecking
     const user = await User.findById(res.locals.jwtData.id);
     if (!user) {
-      return res.status(400).json({ message: "User not Registered Token Malfunctioned" });
+      return res
+        .status(400)
+        .json({ message: "User not Registered Token Malfunctioned" });
     }
     console.log(user._id.toString(), res.locals.jwtData.id);
-    
-    if (user._id.toString() !==  res.locals.jwtData.id) {
-      return res.status(401).json({ message: "Permissions didn't match" }); 
+
+    if (user._id.toString() !== res.locals.jwtData.id) {
+      return res.status(401).json({ message: "Permissions didn't match" });
     }
     return res
       .status(200)
@@ -135,20 +151,26 @@ export const UserLogout = async (
     // user token ckecking
     const user = await User.findById(res.locals.jwtData.id);
     if (!user) {
-      return res.status(400).json({ message: "User not Registered Token Malfunctioned" });
+      return res
+        .status(400)
+        .json({ message: "User not Registered Token Malfunctioned" });
     }
     console.log(user._id.toString(), res.locals.jwtData.id);
-    
-    if (user._id.toString() !==  res.locals.jwtData.id) {
-      return res.status(401).json({ message: "Permissions didn't match" }); 
+
+    if (user._id.toString() !== res.locals.jwtData.id) {
+      return res.status(401).json({ message: "Permissions didn't match" });
     }
     res.clearCookie(COOKIE_NAME, {
       path: "/",
       httpOnly: true,
-      domain: process.env.NODE_ENV === "production" ? "mern-ai-chatbot-frontend.onrender.com" : "localhost",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "mern-ai-chatbot-frontend.onrender.com"
+          : "localhost",
       signed: true,
+      secure: true,
     });
-    
+
     return res
       .status(200)
       .json({ message: "OK", name: user.name, email: user.email });
