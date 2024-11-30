@@ -14,11 +14,11 @@ const Header = () => {
         <div>
           {auth?.isLoggedIn ? (
             <>
-              <NavigationLink
-                bg="#40c4ff"
+             <NavigationLink
+                bg="none"
                 to="/chat"
-                text="Start Chat"
-                textColor="white"
+                text=" "
+                textColor="none"
               />
               <NavigationLink
                 bg="#40c4ff"
