@@ -11,7 +11,7 @@ const Home = () => {
           flexDirection: "column",
           textAlign: "center",
           mx: "auto",
-          mt: 20,
+          mt: 2,
         }}
       >
         <Box
