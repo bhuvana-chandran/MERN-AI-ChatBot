@@ -22,12 +22,18 @@ export const signUpUser = async (
   return data;
 };
 export const checkAuthStatus = async () => {
-  const res = await axios.get("/user/auth-status");
-  if (res.status !== 200) {
-    throw new Error("Unable to Authenticate");
+  try {
+    const res = await axios.get("/user/auth-status", {
+      withCredentials: true,
+    });
+    if (res.status !== 200) {
+      throw new Error("Unable to Authenticate");
+    }
+    return res.data;
+  } catch (error) {
+    console.error("Error checking authentication status:", error);
+    throw error;
   }
-  const data = await res.data;
-  return data;
 };
 
 export const sendChatRequest = async (message: string) => {
