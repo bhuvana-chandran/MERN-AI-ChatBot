@@ -14,9 +14,6 @@ const Home = () => {
           mt: 20,
         }}
       >
-        <Box>
-          <TypingAnimation />
-        </Box>
         <Box
           sx={{
             width: "100%",
@@ -38,6 +35,9 @@ const Home = () => {
                 "linear-gradient(to right, transparent, black 45%, black 5%, transparent)",
             }}
           />
+        </Box>
+        <Box>
+          <TypingAnimation />
         </Box>
       </Box>
     </Box>
